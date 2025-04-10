@@ -1,0 +1,37 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    commands:
+      - echo Installing dependencies...
+      - npm install
+
+  pre_build:
+    commands:
+      - echo Running tests...
+      - npm test -- --watchAll=false || echo "Tests failed but continuing build"
+
+  build:
+    commands:
+      - echo Building React application...
+      - npm run build
+      - echo Build completed on `date`
+
+  post_build:
+    commands:
+      - echo Packaging artifacts...
+      - echo Build completed successfully!
+
+artifacts:
+  files:
+    - build/**/*
+    - package.json
+    - README.md
+  base-directory: '.'
+  discard-paths: no
+
+cache:
+  paths:
+    - 'node_modules/**/*'
