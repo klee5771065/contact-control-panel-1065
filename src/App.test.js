@@ -1,6 +1,21 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 
+// Mock the AgentStateContext to avoid errors
+jest.mock('./context/AgentStateContext', () => ({
+  AgentStateProvider: ({ children }) => children,
+  useAgentState: () => ({
+    agentData: {
+      agentStatus: 'Loading...',
+      contactState: 'None',
+      isOnCall: false,
+      contactId: null,
+      callAttributes: {}
+    },
+    setAgentData: jest.fn()
+  })
+}));
+
 test('renders core CCP elements', () => {
   render(<App />);
 
