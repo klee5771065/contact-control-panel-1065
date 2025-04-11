@@ -1,9 +1,16 @@
 // src/components/CallControlsComponent.js
 import React, { useState } from 'react';
+import { useAgentState } from '../context/AgentStateContext';
 
-const CallControlsComponent = ({ agentData, isOnCall, contactId }) => {
+const CallControlsComponent = () => {
     const [isMuted, setIsMuted] = useState(false);
     const [isOnHold, setIsOnHold] = useState(false);
+
+    const { agentData } = useAgentState(); // Get agentData from context
+    // Extract values you need
+    const { contactState, isOnCall, contactId } = agentData;
+
+    // Use these values in your component exactly as before
 
     const handleAcceptCall = () => {
         if (!window.connect || !contactId) return;

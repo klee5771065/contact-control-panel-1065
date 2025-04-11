@@ -7,16 +7,9 @@ import './App.css';
 import CCPComponent from './components/CCPComponent';
 import AgentStatusComponent from './components/AgentStatusComponent';
 import CallControlsComponent from './components/CallControlsComponent';
+import { AgentStateProvider } from './context/AgentStateContext';
 
 function App() {
-  const [agentData, setAgentData] = useState({
-    agentStatus: 'Loading...',
-    contactState: 'None',
-    isOnCall: false,
-    contactId: null,
-    callAttributes: {}
-  });
-
   // Configuration for your Amazon Connect instance
   const connectConfig = {
     // Replace with your actual Amazon Connect instance URL
@@ -29,34 +22,32 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      <header className="app-header">
-        <h1>Custom Amazon Connect CCP</h1>
-      </header>
+    <AgentStateProvider>
+      <div className="app-container">
+        <header className="app-header">
+          <h1>Custom Amazon Connect CCP</h1>
+        </header>
 
-      <div className="main-content">
-        <div className="ccp-container">
-          <h2>CCP (Hidden)</h2>
-          <CCPComponent connectConfig={connectConfig} setAgentData={setAgentData} />
-        </div>
-
-        <div className="custom-ui-container">
-          <div className="agent-status-panel">
-            <h2>Agent Status</h2>
-            <AgentStatusComponent agentData={agentData} />
+        <div className="main-content">
+          <div className="ccp-container">
+            <h2>CCP (Hidden)</h2>
+            <CCPComponent connectConfig={connectConfig} />
           </div>
 
-          <div className="call-controls-panel">
-            <h2>Call Controls</h2>
-            <CallControlsComponent
-              agentData={agentData}
-              isOnCall={agentData.isOnCall}
-              contactId={agentData.contactId}
-            />
+          <div className="custom-ui-container">
+            <div className="agent-status-panel">
+              <h2>Agent Status</h2>
+              <AgentStatusComponent />
+            </div>
+
+            <div className="call-controls-panel">
+              <h2>Call Controls</h2>
+              <CallControlsComponent />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </AgentStateProvider>
   );
 }
 

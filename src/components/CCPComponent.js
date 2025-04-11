@@ -1,10 +1,12 @@
 // src/components/CCPComponent.js
 
 import React, { useEffect, useRef } from 'react';
+import { useAgentState } from '../context/AgentStateContext';
 
-const CCPComponent = ({ connectConfig, setAgentData }) => {
+const CCPComponent = ({ connectConfig }) => {
     const containerRef = useRef(null);
     const isInitialized = useRef(false);
+    const { setAgentData } = useAgentState(); // Get setAgentData from context
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         // Load the Amazon Connect Streams API

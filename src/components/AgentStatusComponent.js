@@ -1,7 +1,10 @@
 // src/components/AgentStatusComponent.js
 import React from 'react';
+import { useAgentState } from '../context/AgentStateContext';
 
-const AgentStatusComponent = ({ agentData }) => {
+const AgentStatusComponent = () => {
+    const { agentData } = useAgentState(); // Get agentData from context
+
     const getStatusColor = (status) => {
         switch (status) {
             case 'Available':
