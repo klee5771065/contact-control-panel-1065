@@ -2,4 +2,9 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
+
+// src/setupTests.js
 import '@testing-library/jest-dom';
+
+// Mock the Amazon Connect global object
+global.connect = require('./__mocks__/amazon-connect').default;
