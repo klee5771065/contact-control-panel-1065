@@ -22,10 +22,7 @@
   "jest": {
     "moduleNameMapper": {
       "^amazon-connect-streams$": "<rootDir>/src/__mocks__/amazon-connect.js"
-    },
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.js"
-    ]
+    }
   },
   "eslintConfig": {
     "extends": [
