@@ -26,7 +26,9 @@ phases:
 
 artifacts:
   files:
+    - appspec.yml
     - build/**/*
+    - scripts/**/*
     - package.json
     - README.md
   base-directory: '.'
